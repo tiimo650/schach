@@ -9,6 +9,10 @@ class King extends Spielfigur{
 
   @override
   List<List<int>> getPositions() {
-    return [];
+    List<List<int>> positionen = List.generate(8, (int index) => []);
+    for(int i= 0;i<8;i++){
+      positionen[i] = getRichtungPositionen(i, 1, id);
+    }
+    return deleteWrongPos(positionen);
   }
 }

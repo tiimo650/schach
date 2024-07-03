@@ -57,11 +57,11 @@ class Layoutfiguren {
 
         //rook test
         liste.removeAt(30);
-        liste.insert(30, Rook(id: 30, color: "black"));
+        liste.insert(30, Queen(id: 30, color: "black"));
         liste.removeAt(17);
-        liste.insert(17, Rook(id: 17, color: "black"));
-        liste.removeAt(33);
-        liste.insert(33, Pawn(id: 33, color: "white"));
+        liste.insert(17, Queen(id: 17, color: "black"));
+        liste.removeAt(41);
+        liste.insert(41, Queen(id: 41, color: "white"));
 
 
 
