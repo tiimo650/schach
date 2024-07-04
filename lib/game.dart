@@ -13,7 +13,7 @@ import 'package:schach/variables/variables.dart';
 
 class Game extends StatefulWidget {
   Game({super.key});
-
+  static List<Spielfigur> geschlageneFiguren = [];
   static int currentSelected = -1;
   static List<List<String>> history = [
     [

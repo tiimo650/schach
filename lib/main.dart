@@ -25,7 +25,7 @@ class MyApp extends StatelessWidget {
 
 class MyHomePage extends StatefulWidget {
   const MyHomePage({super.key, required this.title});
-  static var mediaSize;
+  static var mediaheight;
   final String title;
 
   @override
@@ -36,7 +36,7 @@ class _MyHomePageState extends State<MyHomePage> {
 
   @override
   Widget build(BuildContext context) {
-    MyHomePage.mediaSize = MediaQuery.of(context).size;
+    MyHomePage.mediaheight = MediaQuery.sizeOf(context).height;
     return Scaffold(
       appBar: AppBar(
         backgroundColor: Theme.of(context).colorScheme.inversePrimary,

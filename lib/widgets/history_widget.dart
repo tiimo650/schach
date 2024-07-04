@@ -1,7 +1,10 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:schach/game.dart';
+import 'package:schach/main.dart';
 import 'package:schach/variables/styles.dart';
 import 'package:schach/variables/variables.dart';
+import 'package:schach/widgets/game_widget.dart';
 
 import '../spielfigur.dart';
 
@@ -43,22 +46,71 @@ class _HistoryWidgetState extends State<HistoryWidget> {
         "Moves: ${(colour==Colour.white) ? history[0].length : history[1].length}",
         style: const TextStyle(fontSize: 40),
       ),
-      Container(
-        child: SizedBox(
-          height: MediaQuery.sizeOf(context).height * 0.5,
-          width: MediaQuery.sizeOf(context).width * 0.21,
-          child: ListView.builder(
-            controller: _scrollController,
-            scrollDirection: Axis.vertical,
-            itemCount: (colour==Colour.white) ? history[0].length : history[1].length,
-            itemBuilder: (context, index) => Center(
-              child: ListTile(
-                title: Text((colour==Colour.white) ? history[0][index] : history[1][index], style: Styles.boldMiddle),
-              ),
+      SizedBox(
+        height: MediaQuery.sizeOf(context).height * 0.5,
+        width: MediaQuery.sizeOf(context).width * 0.21,
+        child: ListView.builder(
+          controller: _scrollController,
+          scrollDirection: Axis.vertical,
+          itemCount: (colour==Colour.white) ? history[0].length : history[1].length,
+          itemBuilder: (context, index) => Center(
+            child: ListTile(
+              title: Text((colour==Colour.white) ? history[0][index] : history[1][index], style: Styles.boldMiddle),
             ),
           ),
         ),
-      )
+      ),
+      //hier jetzt geschlagene figuren anzeigen
+      Center(
+        child: Text(
+          "geschlagene Figuren:",style: Styles.redSmall,
+        ),
+      ),
+      (Game.geschlageneFiguren.isNotEmpty) ? Geschlagene(): Center(),
+
     ]);
   }
 }
+
+
+
+class GeschlageneFiguren extends StatelessWidget {
+  final List<Spielfigur> list;
+  const GeschlageneFiguren({super.key, required this.list});
+
+  @override
+  Widget build(BuildContext context) {
+    return SizedBox(
+      width: MediaQuery.sizeOf(context).height * 0.25,
+      height: MediaQuery.sizeOf(context).width * 0.1,
+      child: GridView.count(crossAxisCount: 5, children:
+        list
+      ),
+    );
+  }
+}
+
+class Geschlagene extends StatefulWidget {
+  const Geschlagene({super.key});
+
+  @override
+  State<Geschlagene> createState() => _GeschlageneState();
+}
+
+class _GeschlageneState extends State<Geschlagene> {
+  @override
+  Widget build(BuildContext context) {
+    List<Spielfigur> list = Game.geschlageneFiguren;
+
+    return SizedBox(
+      width: MediaQuery.sizeOf(context).height * 0.3,
+      height: MediaQuery.sizeOf(context).width * 0.15,
+      child: GridView.count(mainAxisSpacing: 40, crossAxisSpacing: 0, crossAxisCount: 5, children:
+      List.generate(list.length, (int index) => SizedBox(
+        child: list[index];,
+      ))
+      ),
+    );
+  }
+}
+

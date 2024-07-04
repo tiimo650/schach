@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:schach/main.dart';
 enum Colour{
   black,white
 }
@@ -6,7 +7,7 @@ abstract class Spielfigur extends StatelessWidget {
   late int id;
   final Colour color;
   final IconData icon;
-
+  late double size = (MyHomePage.mediaheight * 0.05 + 5);
 
   Spielfigur(
       {super.key, required this.id, required this.color, required this.icon});
@@ -16,7 +17,7 @@ abstract class Spielfigur extends StatelessWidget {
     return Icon(
           icon,
           color: getColor(color),
-          size: (MediaQuery.sizeOf(context).width * 0.05 + 5),
+          size: size,
         );
   }
 

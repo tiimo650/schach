@@ -51,5 +51,10 @@ class Styles{
     return (colour==Colour.white) ? titleWHITE : titleBLACK;
   }
 
+  static TextStyle redSmall = const TextStyle(
+    fontSize: 15,
+    color: Colors.red,
+    fontWeight: FontWeight.bold,
+  );
 
 }

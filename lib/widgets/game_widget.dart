@@ -47,6 +47,11 @@ class _GameWidgetState extends State<GameWidget> {
                   if (intListContains(index)) {
                     setHistory(Game.currentSelected, index);
                     setState(() {
+                      if(figurenliste[index]!=null){
+                        //wenn jmd auf diesem feld steht wird er geschlagen und in die liste eingetragen
+                        Game.geschlageneFiguren.add(figurenliste[index] as Spielfigur);
+                        widget.function();
+                      }
                       widget.function();
                       Spielfigur? tempSpielfigur =
                       figurenliste[Game.currentSelected];
