@@ -1,9 +1,6 @@
 import 'dart:core';
-import 'dart:core';
 
-import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter/painting.dart';
 import 'package:schach/game.dart';
 import 'package:schach/spielfigur.dart';
 
@@ -48,7 +45,7 @@ BoxDecoration getdec(int id) {
 
 Widget getChild(int id, var spielfigur, var context) {
   List<List<int>> fields = Game.fields;
-  if (ListContains(fields, id) && spielfigur == null) {
+  if (listContains(fields, id) && spielfigur == null) {
     return Container(
       decoration: const BoxDecoration(
         shape: BoxShape.circle,
@@ -87,7 +84,7 @@ bool isLastList(List<List<int>> fields, int id){
   return false;
 }
 
-bool ListContains(List<List<int>> liste, int id){
+bool listContains(List<List<int>> liste, int id){
   for(List<int> i in liste){
     if(i.contains(id)){
       return true;

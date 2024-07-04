@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:schach/boardField.dart';
+import 'package:schach/board_field.dart';
 import 'package:schach/spielfigur.dart';
 import 'package:schach/layout_figuren.dart';
 
@@ -18,7 +18,7 @@ class _GameState extends State<Game> {
   late bool test3 = false;
   late var temp;
 
-  late List<Spielfigur?> figurenliste = Layoutfiguren().getSpielfiguren();
+  late List<Spielfigur?> figurenliste = Layoutfiguren().getSpielfiguren(1);
   int aktiverSpieler = 0;
 
   //late List<Spielfigur> figurenliste = List.generate(64, (int index) => Spielfigur(id: index, color: "color"));
@@ -126,7 +126,7 @@ class _GameState extends State<Game> {
     Game.fields = liste;
   }
 
-  bool ListContains(List<Spielfigur> liste, int id) {
+  bool listContains(List<Spielfigur> liste, int id) {
     for (int i = 0; i < liste.length; i++) {
       if (liste[i].id == id) {
         return true;
