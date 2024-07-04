@@ -1,11 +1,11 @@
 import 'package:flutter/material.dart';
 
 abstract class Spielfigur extends StatelessWidget {
-  final int id;
+  late int id;
   final String color;
   final IconData icon;
 
-  const Spielfigur(
+  Spielfigur(
       {super.key, required this.id, required this.color, required this.icon});
 
   @override

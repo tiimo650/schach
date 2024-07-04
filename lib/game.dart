@@ -7,6 +7,7 @@ class Game extends StatefulWidget {
   const Game({super.key});
 
   static int currentSelected = -1;
+  static String currentPlayer = "white";
   static List<List<int>> fields = [[]];
   final title = "Schach spielen";
 
@@ -48,7 +49,22 @@ class _GameState extends State<Game> {
                 return GestureDetector(
                   onTap: () {
                     debugPrint("$index");
-                    if (figurenliste[index] != null) {
+                    if (intListContains(index)) {
+                      setState(() {
+                        Spielfigur? tempSpielfigur =
+                            figurenliste[Game.currentSelected];
+                        figurenliste[index] = tempSpielfigur;
+                        figurenliste[Game.currentSelected] = null;
+                        figurenliste[index]?.id = index;
+                        Game.fields = [[]];
+                        if (Game.currentPlayer == "white") {
+                          Game.currentPlayer = "black";
+                        } else {
+                          Game.currentPlayer = "white";
+                        }
+                      });
+                    } else if (figurenliste[index] != null &&
+                        figurenliste[index]?.color == Game.currentPlayer) {
                       setState(() {
                         Game.currentSelected = index;
                         changeDots(figurenliste[index] as Spielfigur);
@@ -66,6 +82,15 @@ class _GameState extends State<Game> {
         ),
       ),
     );
+  }
+
+  bool intListContains(int index) {
+    for (List<int> i in Game.fields) {
+      if (i.contains(index)) {
+        return true;
+      }
+    }
+    return false;
   }
 
   void changeDots(Spielfigur spielfigur) {
