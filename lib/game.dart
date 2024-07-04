@@ -7,7 +7,7 @@ class Game extends StatefulWidget {
   const Game({super.key});
 
   static int currentSelected = -1;
-  static String currentPlayer = "white";
+  static Colour currentPlayer = Colour.white;
   static List<List<int>> fields = [[]];
   final title = "Schach spielen";
 
@@ -57,11 +57,12 @@ class _GameState extends State<Game> {
                         figurenliste[Game.currentSelected] = null;
                         figurenliste[index]?.id = index;
                         Game.fields = [[]];
-                        if (Game.currentPlayer == "white") {
-                          Game.currentPlayer = "black";
+                        if (Game.currentPlayer == Colour.white) {
+                          Game.currentPlayer = Colour.black;
                         } else {
-                          Game.currentPlayer = "white";
+                          Game.currentPlayer = Colour.white;
                         }
+                        Game.currentSelected=-1;
                       });
                     } else if (figurenliste[index] != null &&
                         figurenliste[index]?.color == Game.currentPlayer) {

@@ -1,9 +1,12 @@
 import 'package:flutter/material.dart';
-
+enum Colour{
+  black,white
+}
 abstract class Spielfigur extends StatelessWidget {
   late int id;
-  final String color;
+  final Colour color;
   final IconData icon;
+
 
   Spielfigur(
       {super.key, required this.id, required this.color, required this.icon});
@@ -19,10 +22,10 @@ abstract class Spielfigur extends StatelessWidget {
 
   List<List<int>> getPositions();
 
-  Color getColor(String color) {
-    if (color == "white") {
+  Color getColor(Colour color) {
+    if (color == Colour.white) {
       return Colors.white;
-    } else if (color == "black") {
+    } else if (color == Colour.black) {
       return Colors.black87;
     }
     return Colors.red;

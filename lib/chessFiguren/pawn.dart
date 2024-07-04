@@ -8,7 +8,7 @@ class Pawn extends Spielfigur{
   @override
   List<List<int>> getPositions() {
     List<List<int>> positionen = [[]];
-    if(color=="white"){
+    if(color==Colour.white){
       positionen[0].add(id+8);
       positionen[0].add(id+16);
     }
