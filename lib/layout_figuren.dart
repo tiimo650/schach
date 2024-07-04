@@ -33,50 +33,50 @@ class Layoutfiguren {
     List<Spielfigur?> getSpielfiguren(int option) {
         switch(option){
             case 0:
-                liste.add(Rook(id: 0, color: Colour.white));
-                liste.add(Knight(id: 1, color: Colour.white));
-                liste.add(Bishop(id: 2, color: Colour.white));
-                liste.add(Queen(id: 3, color: Colour.white));
-                liste.add(King(id: 4, color: Colour.white));
-                liste.add(Bishop(id: 5, color: Colour.white));
-                liste.add(Knight(id: 6, color: Colour.white));
-                liste.add(Rook(id: 7, color: Colour.white));
+                liste.add(Rook(id: 0, color: Colour.black));
+                liste.add(Knight(id: 1, color: Colour.black));
+                liste.add(Bishop(id: 2, color: Colour.black));
+                liste.add(Queen(id: 3, color: Colour.black));
+                liste.add(King(id: 4, color: Colour.black));
+                liste.add(Bishop(id: 5, color: Colour.black));
+                liste.add(Knight(id: 6, color: Colour.black));
+                liste.add(Rook(id: 7, color: Colour.black));
                 liste +=
-                    List.generate(8, (int index) => Pawn(id: index + 8, color: Colour.white));
+                    List.generate(8, (int index) => Pawn(id: index + 8, color: Colour.black));
                 liste += List.generate(32, (int index) => null);
                 liste +=
-                    List.generate(8, (int index) => Pawn(id: index + 48, color: Colour.black));
-                liste.add(Rook(id: 56, color: Colour.black));
-                liste.add(Knight(id: 57, color: Colour.black));
-                liste.add(Bishop(id: 58, color: Colour.black));
-                liste.add(Queen(id: 59, color: Colour.black));
-                liste.add(King(id: 60, color: Colour.black));
-                liste.add(Bishop(id: 61, color: Colour.black));
-                liste.add(Knight(id: 62, color: Colour.black));
-                liste.add(Rook(id: 63, color: Colour.black));
+                    List.generate(8, (int index) => Pawn(id: index + 48, color: Colour.white));
+                liste.add(Rook(id: 56, color: Colour.white));
+                liste.add(Knight(id: 57, color: Colour.white));
+                liste.add(Bishop(id: 58, color: Colour.white));
+                liste.add(Queen(id: 59, color: Colour.white));
+                liste.add(King(id: 60, color: Colour.white));
+                liste.add(Bishop(id: 61, color: Colour.white));
+                liste.add(Knight(id: 62, color: Colour.white));
+                liste.add(Rook(id: 63, color: Colour.white));
                 break;
             case 1:
-                liste.add(Rook(id: 0, color: Colour.white));
-                liste.add(Knight(id: 1, color: Colour.white));
-                liste.add(Bishop(id: 2, color: Colour.white));
-                liste.add(Queen(id: 3, color: Colour.white));
-                liste.add(King(id: 4, color: Colour.white));
-                liste.add(Bishop(id: 5, color: Colour.white));
-                liste.add(Knight(id: 6, color: Colour.white));
-                liste.add(Rook(id: 7, color: Colour.white));
+                liste.add(Rook(id: 0, color: Colour.black));
+                liste.add(Knight(id: 1, color: Colour.black));
+                liste.add(Bishop(id: 2, color: Colour.black));
+                liste.add(Queen(id: 3, color: Colour.black));
+                liste.add(King(id: 4, color: Colour.black));
+                liste.add(Bishop(id: 5, color: Colour.black));
+                liste.add(Knight(id: 6, color: Colour.black));
+                liste.add(Rook(id: 7, color: Colour.black));
                 liste +=
-                    List.generate(8, (int index) => Pawn(id: index + 8, color: Colour.white));
+                    List.generate(8, (int index) => Pawn(id: index + 8, color: Colour.black));
                 liste += List.generate(32, (int index) => null);
                 liste +=
-                    List.generate(8, (int index) => Pawn(id: index + 48, color: Colour.black));
-                liste.add(Rook(id: 56, color: Colour.black));
-                liste.add(Knight(id: 57, color: Colour.black));
-                liste.add(Bishop(id: 58, color: Colour.black));
-                liste.add(Queen(id: 59, color: Colour.black));
-                liste.add(King(id: 60, color: Colour.black));
-                liste.add(Bishop(id: 61, color: Colour.black));
-                liste.add(Knight(id: 62, color: Colour.black));
-                liste.add(Rook(id: 63, color: Colour.black));
+                    List.generate(8, (int index) => Pawn(id: index + 48, color: Colour.white));
+                liste.add(Rook(id: 56, color: Colour.white));
+                liste.add(Knight(id: 57, color: Colour.white));
+                liste.add(Bishop(id: 58, color: Colour.white));
+                liste.add(Queen(id: 59, color: Colour.white));
+                liste.add(King(id: 60, color: Colour.white));
+                liste.add(Bishop(id: 61, color: Colour.white));
+                liste.add(Knight(id: 62, color: Colour.white));
+                liste.add(Rook(id: 63, color: Colour.white));
 
 
                 //rook test

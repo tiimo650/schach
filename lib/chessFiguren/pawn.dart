@@ -9,12 +9,12 @@ class Pawn extends Spielfigur{
   List<List<int>> getPositions() {
     List<List<int>> positionen = [[]];
     if(color==Colour.white){
-      positionen[0].add(id+8);
-      positionen[0].add(id+16);
-    }
-    else{
       positionen[0].add(id-8);
       positionen[0].add(id-16);
+    }
+    else{
+      positionen[0].add(id+8);
+      positionen[0].add(id+16);
     }
     return deleteWrongPos(positionen);
   }

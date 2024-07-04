@@ -19,7 +19,7 @@ class _GameState extends State<Game> {
   late bool test3 = false;
   late var temp;
 
-  late List<Spielfigur?> figurenliste = Layoutfiguren().getSpielfiguren(1);
+  late List<Spielfigur?> figurenliste = Layoutfiguren().getSpielfiguren(0);
   int aktiverSpieler = 0;
 
   //late List<Spielfigur> figurenliste = List.generate(64, (int index) => Spielfigur(id: index, color: "color"));
@@ -120,6 +120,8 @@ class _GameState extends State<Game> {
                   figurenliste.elementAt(Game.currentSelected)?.color &&
               !delete) {
             killlist.add(liste[i][j]);
+          }else{
+            liste[i][j] = -1;
           }
           delete = true;
         } else if (delete) {
