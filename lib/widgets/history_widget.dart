@@ -101,13 +101,14 @@ class _GeschlageneState extends State<Geschlagene> {
   @override
   Widget build(BuildContext context) {
     List<Spielfigur> list = Game.geschlageneFiguren;
+    list[0].size = 1;
 
     return SizedBox(
       width: MediaQuery.sizeOf(context).height * 0.3,
       height: MediaQuery.sizeOf(context).width * 0.15,
       child: GridView.count(mainAxisSpacing: 40, crossAxisSpacing: 0, crossAxisCount: 5, children:
       List.generate(list.length, (int index) => SizedBox(
-        child: list[index];,
+        child: list[index],
       ))
       ),
     );
