@@ -1,11 +1,12 @@
 import 'package:flutter/material.dart';
 import 'package:schach/board_field.dart';
+import 'package:schach/chessFiguren/pawn.dart';
 import 'package:schach/spielfigur.dart';
 import 'package:schach/layout_figuren.dart';
 
 class Game extends StatefulWidget {
   const Game({super.key});
-
+  static int moves = 0;
   static int currentSelected = -1;
   static Colour currentPlayer = Colour.white;
   static List<List<int>> fields = [[]];
@@ -63,6 +64,7 @@ class _GameState extends State<Game> {
                           Game.currentPlayer = Colour.white;
                         }
                         Game.currentSelected=-1;
+                        Game.moves++;
                       });
                     } else if (figurenliste[index] != null &&
                         figurenliste[index]?.color == Game.currentPlayer) {
@@ -119,13 +121,22 @@ class _GameState extends State<Game> {
           if (aktuellesObjekt.color !=
                   figurenliste.elementAt(Game.currentSelected)?.color &&
               !delete) {
-            killlist.add(liste[i][j]);
+            if(figurenliste[Game.currentSelected] is! Pawn){
+              killlist.add(liste[i][j]);
+            } else if(i==0){
+              liste[i][j] = -1;
+            } else{
+              killlist.add(liste[i][j]);
+            }
           }else{
             liste[i][j] = -1;
           }
           delete = true;
         } else if (delete) {
           liste[i].removeRange(j, liste[i].length);
+        } else if(figurenliste[Game.currentSelected] is Pawn && i>0){
+          //pawn diagonal attack
+          liste[i][j] = -1;
         }
       }
     }
