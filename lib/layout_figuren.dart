@@ -95,6 +95,12 @@ class Layoutfiguren {
                 liste.removeAt(2);
                 liste.insert(2, Knight(id: 2, color: Colour.white));
                 break;
+            case 3:
+                //geschlagene Figuren testing
+                liste += List.generate(5, (int index) => Pawn(id: index, color: Colour.white));
+
+            case 4:
+                liste += List.generate(4, (int index) => Pawn(id: index, color: Colour.black));
         }
 
 

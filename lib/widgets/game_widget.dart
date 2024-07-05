@@ -49,7 +49,13 @@ class _GameWidgetState extends State<GameWidget> {
                     setState(() {
                       if(figurenliste[index]!=null){
                         //wenn jmd auf diesem feld steht wird er geschlagen und in die liste eingetragen
-                        Game.geschlageneFiguren.add(figurenliste[index] as Spielfigur);
+                        Spielfigur figur = figurenliste[index] as Spielfigur;
+                        if(figur.color == Colour.white){
+                          Game.geschlageneFiguren[0].add(figur);
+                        }
+                        else{
+                          Game.geschlageneFiguren[1].add(figur);
+                        }
                         widget.function();
                       }
                       widget.function();

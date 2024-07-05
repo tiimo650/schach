@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:schach/main.dart';
+import 'package:schach/home_page/main.dart';
 enum Colour{
   black,white
 }
@@ -7,13 +7,14 @@ abstract class Spielfigur extends StatelessWidget {
   late int id;
   final Colour color;
   final IconData icon;
-  late double size = (MyHomePage.mediaheight * 0.05 + 5);
+  late double size = MyHomePage.mediawidth * 0.05 + 5;
 
   Spielfigur(
       {super.key, required this.id, required this.color, required this.icon});
 
   @override
   Widget build(BuildContext context) {
+
     return Icon(
           icon,
           color: getColor(color),
