@@ -7,16 +7,20 @@ import 'main.dart';
 
 class RowPiece extends StatelessWidget {
   final String title;
+  final Widget page;
   final IconData icon;
-  const RowPiece({super.key, required this.title, required this.icon});
+  final Function function;
+
+  const RowPiece({super.key, required this.title, required this.icon, required this.page, required this.function});
 
   @override
   Widget build(BuildContext context) {
+
     Size media = MediaQuery.sizeOf(context);
     return Container(
       padding: EdgeInsets.all(60),
       child: Material(
-        elevation: 20,
+        elevation: 50,
         borderRadius: BorderRadius.circular(20),
         child: SizedBox(
           width: media.width*0.23,
@@ -24,7 +28,7 @@ class RowPiece extends StatelessWidget {
           child: Container(
             child: TextButton(
                 onPressed: () {
-                  Navigator.push(context, ShrinkingAppBarRoute(page: Game()));
+                  Navigator.push(context, MaterialPageRoute(builder: (context) => Game(function: function)));
                 },
                 child: Stack(
                   alignment: Alignment.center,

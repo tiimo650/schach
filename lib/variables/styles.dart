@@ -65,7 +65,12 @@ class Styles{
       fontSize: 27,
     letterSpacing: 15,
   );
-
+  static const TextStyle gameTitleHome = const TextStyle(
+    fontWeight: FontWeight.w900,
+    color:  Colors.white,
+    fontSize: 45,
+    letterSpacing: 16,
+  );
 
   static TextStyle playTITLE(double i) => TextStyle(
     fontWeight: FontWeight.w900,

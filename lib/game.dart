@@ -11,12 +11,17 @@ import 'package:schach/layout_figuren.dart';
 import 'dart:ui';
 
 import 'package:schach/variables/variables.dart';
+enum Status {
+  schachmatt, schach, remis, weiter,
+}
 
 class Game extends StatefulWidget {
-  Game({super.key});
+  Game({super.key, required this.function});
 
   static List<List<Spielfigur?>> geschlageneFiguren = [[],[]];
   static int currentSelected = -1;
+  static Status status = Status.weiter;
+  final Function function;
   static List<List<String>> history = [
     [
 
@@ -38,31 +43,51 @@ class Game extends StatefulWidget {
 }
 
 class _GameState extends State<Game> {
-  late Function function = () {
-    setState(() {});
-  };
   late List<Spielfigur?> figurenliste = widget.figurenliste;
 
   //late GameWidget gameWidget = widget.gameWidget;
   @override
   Widget build(BuildContext context) {
+      function(){
+      widget.function();
+      setState(() {
+
+      });
+      setState(() {
+        widget.function();
+      });
+    }
     return Scaffold(
-      /*appBar: AppBar(
+      appBar: AppBar(
+        centerTitle: true,
         elevation: 5,
         shape: const ContinuousRectangleBorder(
-          borderRadius: BorderRadius.only(bottomLeft: Radius.circular(10),bottomRight: Radius.circular(10)),
+          borderRadius: BorderRadius.only(
+              bottomLeft: Radius.circular(10),
+              bottomRight: Radius.circular(10)),
         ),
         backgroundColor: Color.fromRGBO(75, 107, 128, 1.0),
         title: Row(
+          mainAxisSize: MainAxisSize.min,
           mainAxisAlignment: MainAxisAlignment.center,
           children: [
-            Icon(MdiIcons.chessQueen, color: Colors.white,),
-            Text(widget.title, style: Styles.gameTitle,),
+            Icon(
+              MdiIcons.chessQueen,
+              color: Colors.white,
+            ),
+            const Text(
+              "PLAY",
+              style: Styles.gameTitle,
+            ),
+
             Icon(MdiIcons.chessKing, color: Colors.white),
+            Text("  ${Game.status}",
+              style: Styles.boldMiddle,
+            ),
           ],
         ),
-        centerTitle: true,
-      ),*/
+        toolbarHeight: kToolbarHeight*0.8,
+      ),
       body: Stack(children: [
         Container(
           decoration: const BoxDecoration(

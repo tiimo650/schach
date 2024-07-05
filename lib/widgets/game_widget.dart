@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 
 import '../board_field.dart';
+import '../chessFiguren/king.dart';
 import '../chessFiguren/pawn.dart';
 import '../game.dart';
 import '../layout_figuren.dart';
@@ -11,6 +12,7 @@ class GameWidget extends StatefulWidget {
   final List<Spielfigur?> figurenliste;
 
   final Function function;
+
   GameWidget({super.key, required this.figurenliste, required this.function});
 
   @override
@@ -21,7 +23,7 @@ class _GameWidgetState extends State<GameWidget> {
 
   late List<Spielfigur?> figurenliste = widget.figurenliste;
 
-  void setHistory( int indexOld, int indexNew,) {
+  void setHistory(int indexOld, int indexNew,) {
     String n = "";
     int i = (figurenliste[indexOld]?.color == Colour.white) ? 0 : 1;
     n += Functions.getFieldName(indexOld);
@@ -31,29 +33,30 @@ class _GameWidgetState extends State<GameWidget> {
   }
 
 
-
   @override
   Widget build(BuildContext context) {
-
     return Center(
       child: SizedBox(
-        width: MediaQuery.sizeOf(context).height * 0.95,
+        width: MediaQuery
+            .sizeOf(context)
+            .height * 0.95,
         child: GridView.count(
             crossAxisCount: 8,
             children: List.generate(64, (index) {
               return GestureDetector(
                 onTap: () {
+                  checkWin(Colour.white);
                   debugPrint("$index");
                   if (intListContains(index)) {
                     setHistory(Game.currentSelected, index);
                     setState(() {
-                      if(figurenliste[index]!=null){
+                      if (figurenliste[index] != null) {
                         //wenn jmd auf diesem feld steht wird er geschlagen und in die liste eingetragen
                         Spielfigur figur = figurenliste[index] as Spielfigur;
-                        if(figur.color == Colour.white){
+                        if (figur.color == Colour.white) {
                           Game.geschlageneFiguren[0].add(figur);
                         }
-                        else{
+                        else {
                           Game.geschlageneFiguren[1].add(figur);
                         }
                         widget.function();
@@ -80,6 +83,7 @@ class _GameWidgetState extends State<GameWidget> {
                       changeDots(figurenliste[index] as Spielfigur);
                     });
                   }
+                  checkWin(Colour.white);
                 },
                 child: Boardfield(
                     id: index,
@@ -110,7 +114,6 @@ class _GameWidgetState extends State<GameWidget> {
   }
 
 
-
   void checkDots(List<Spielfigur?> figurenliste) {
     List<List<int>> liste = Game.fields;
     List<int> killlist = [];
@@ -129,7 +132,9 @@ class _GameWidgetState extends State<GameWidget> {
           // schauen ob an aktueller position schon eine figur ist
 
           if (aktuellesObjekt.color !=
-              figurenliste.elementAt(Game.currentSelected)?.color &&
+              figurenliste
+                  .elementAt(Game.currentSelected)
+                  ?.color &&
               !delete) {
             if (figurenliste[Game.currentSelected] is! Pawn) {
               killlist.add(liste[i][j]);
@@ -161,7 +166,9 @@ class _GameWidgetState extends State<GameWidget> {
         if (aktuellesObjekt != null) {
           // schauen ob an aktueller position schon eine figur ist
           if (aktuellesObjekt.color !=
-              figurenliste.elementAt(Game.currentSelected)?.color &&
+              figurenliste
+                  .elementAt(Game.currentSelected)
+                  ?.color &&
               !delete) {
             killlist.add(liste[i][j]);
           }
@@ -183,4 +190,82 @@ class _GameWidgetState extends State<GameWidget> {
     }
     return false;
   }
+
+  bool checkWin(Colour colour) {
+    //1. aktuelle pos des Kings anschauen
+    //2. jede gegnerische Figur durchgehen
+    //3. schauen ob auf irgendeinem Pfad bzw positionsmöglichkeiten der King ist
+    //wenn ja dann muss König sich bewegen ( am besten wird dann angezeigt könig steht im schach
+    //dafür dann alle positionen des Kings durchgehen und genau dasselbe machen und schauen ob er irgendwo sicher ist. wenn nicht dann schach matt
+    int idKing = searchFigurInFigurenliste(King, colour);
+    King king = figurenliste[idKing] as King;
+    Colour gegnerColour = (king.color==Colour.white) ? Colour.black : Colour.white;
+    bool gefahr = false;
+    List<int> alleGegnerPositionen = gegnerPositions(gegnerColour);
+    List<List<int>> positionenKing = king.getPositions();
+    if(!alleGegnerPositionen.contains(idKing)){
+      debugPrint("fast");
+      return false;
+    }else{
+      bool temp = false;
+      for(var i in positionenKing){
+        if(alleGegnerPositionen.contains(i)){
+          temp = true;
+        }else{
+          temp = false;
+        }
+      }
+      if(temp==false){
+        Game.status = Status.schach;
+      }else{
+        Game.status = Status.schachmatt;
+      }
+    }
+    /*positionenKing[0].insert(0, idKing); //erst aktuelle pos des kings überprüfen
+    for (var i in positionenKing) {
+      for (var j in i) {
+
+      }
+    }*/
+    debugPrint("lol");
+    widget.function();
+    return true;
+  }
+
+  List<int> gegnerPositions(Colour colour) {
+    List<int> gegnerPositionen = [];
+    List<Spielfigur> gegner = getFigurenByColor(colour);
+
+    for (var i in gegner) {
+      List<List<int>> list = i.getPositions();
+      for (var j in list) {
+        gegnerPositionen += j;
+      }
+    }
+    return gegnerPositionen;
+  }
+
+
+  List<Spielfigur> getFigurenByColor(Colour color) {
+    List<Spielfigur> colorList = [];
+    for (var i in figurenliste) {
+      if (i?.color == color) {
+        colorList.add(i as Spielfigur);
+      }
+    }
+    return colorList;
+  }
+
+  int searchFigurInFigurenliste(Type typ, Colour color) {
+    for (int i = 0; i < figurenliste.length; i++) {
+      if (figurenliste[i].runtimeType == typ) {
+        if ((figurenliste[i] as Spielfigur).color == color) {
+          return i;
+        }
+      }
+    }
+    return -1;
+  }
+
+
 }
